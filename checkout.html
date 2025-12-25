@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Checkout at Swadeshi Vyapar">
+    <title>Checkout - Swadeshi Vyapar</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">>
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        
+        .page-header {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            opacity: 0.9;
+        }
+        
+        .checkout-steps {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .step.active {
+            opacity: 1;
+            font-weight: 600;
+        }
+        
+        .step-number {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+        
+        .step.active .step-number {
+            background: var(--white);
+            color: var(--primary-orange);
+        }
+        
+        .payment-note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+        
+        .payment-note strong {
+            color: #664d03;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Swadeshi Vyapar Logo">
+                <span class="logo-text">Swadeshi Vyapar</span>
+            </a>
+            
+            <!-- Header Icons -->
+            <div class="header-icons">
+                <!-- Profile Link -->
+                <a href="profile.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span class="label">Profile</span>
+                </a>
+                
+                <!-- Cart -->
+                <a href="cart.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="label">Cart</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-box"></i> Checkout</h1>
+        <p>Complete your order</p>
+        <div class="checkout-steps">
+            <div class="step">
+                <span class="step-number"><i class="fas fa-check"></i></span>
+                <span>Cart</span>
+            </div>
+            <div class="step active">
+                <span class="step-number">2</span>
+                <span>Details</span>
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <span>Confirm</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="checkout-container">
+            <!-- Checkout Form -->
+            <div class="checkout-form">
+                <h2><i class="fas fa-map-marker-alt"></i> Delivery Details</h2>
+                
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email (Optional)</label>
+                        <input type="email" id="email" name="email" placeholder="Enter email for order updates">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Delivery Address *</label>
+                        <textarea id="address" name="address" placeholder="Enter your complete address with landmark" required></textarea>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" placeholder="City" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">Pincode *</label>
+                            <input type="text" id="pincode" name="pincode" placeholder="6-digit pincode" pattern="[0-9]{6}" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <select id="state" name="state">
+                            <option value="">Select State</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="payment-note">
+                        <strong>💳 Payment:</strong> This is a demo checkout. No actual payment will be processed. Click "Place Order" to see the order confirmation.
+                    </div>
+                    
+                    <button type="submit" class="place-order-btn">🎉 Place Order</button>
+                </form>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h3>🛍️ Order Summary</h3>
+                
+                <div class="order-items">
+                    <!-- Items loaded dynamically -->
+                </div>
+                
+                <div class="summary-row" style="margin-top: 20px;">
+                    <span>Subtotal</span>
+                    <span class="order-subtotal">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span class="order-shipping">₹0</span>
+                </div>
+                <div class="summary-row total" style="font-size: 1.2rem; font-weight: 700; margin-top: 15px; padding-top: 15px; border-top: 2px solid var(--light-bg);">
+                    <span>Total</span>
+                    <span class="order-total">₹0</span>
+                </div>
+                
+                <div class="epoints-earned" style="margin-top: 20px;">
+                    <p>🌱 You'll earn</p>
+                    <span class="order-epoints">+0</span>
+                    <p>E-Points!</p>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: var(--light-bg); border-radius: 10px;">
+                    <p style="font-size: 0.85rem; color: var(--text-light);">
+                        📦 Estimated delivery: 5-7 business days<br>
+                        🔄 Easy 7-day returns<br>
+                        ✅ 100% Authentic Products
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="success-modal">
+        <div class="modal-content">
+            <div class="success-icon">🎉</div>
+            <h2>Order Placed Successfully!</h2>
+            <p>Thank you for supporting Swadeshi! Your order has been confirmed.</p>
+            
+            <div class="epoints-earned">
+                <p>You've earned</p>
+                <span class="modal-epoints">+0</span>
+                <p>E-Points!</p>
+            </div>
+            
+            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 20px;">
+                Total E-Points: <strong class="modal-total-points">0</strong>
+            </p>
+            
+            <button onclick="closeSuccessModal()" class="btn btn-primary" style="padding: 15px 40px;">
+                Continue Shopping →
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Swadeshi Vyapar</h4>
+                <p>Building a self-reliant India by connecting you with authentic Indian products and skilled artisans.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="category.html">All Products</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="category.html?type=textiles">Textiles</a></li>
+                    <li><a href="category.html?type=spices">Spices</a></li>
+                    <li><a href="category.html?type=handicrafts">Handicrafts</a></li>
+                    <li><a href="category.html?type=jewellery">Jewellery</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>📧 support@swadeshivyapar.in</li>
+                    <li>📞 +91 1800-XXX-XXXX</li>
+                    <li>📍 Pusad , MH, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Swadeshi Vyapar. Made with ❤️ in India. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

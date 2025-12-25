@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Startup India - Government Initiative for Startups">
+    <title>Startup India - Swadeshi Vyapar</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f5f5;
+        }
+
+        .startup-page {
+            min-height: 100vh;
+            background-image: url('https://i.pinimg.com/originals/51/1e/c5/511ec5645ab64856b460b1c3eb4844d8.png');
+            background-size: 50%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .startup-page::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.88);
+            z-index: 0;
+        }
+
+        .startup-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: white;
+            color: var(--text-dark);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        .startup-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 249, 250, 0.95));
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .startup-badge {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary-orange), #ff6d00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 15px 40px rgba(255, 152, 0, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .startup-badge i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .startup-header h1 {
+            color: var(--primary-green);
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .startup-subtitle {
+            color: var(--primary-orange);
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+
+        .startup-overview {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border-left: 6px solid var(--primary-green);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .startup-overview p {
+            color: #2e7d32;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .startup-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .startup-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .startup-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-orange);
+        }
+
+        .startup-card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #f0f0f0;
+        }
+
+        .startup-card-header i {
+            font-size: 2rem;
+            color: var(--primary-orange);
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .startup-card-header h3 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+        }
+
+        .startup-card ul, .startup-card ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .startup-card li {
+            padding: 12px 0;
+            color: var(--text-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 1rem;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .startup-card li:last-child {
+            border-bottom: none;
+        }
+
+        .startup-card li i {
+            color: var(--primary-green);
+            margin-top: 4px;
+            font-size: 1.1rem;
+        }
+
+        .benefits-card {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            grid-column: span 2;
+        }
+
+        .benefits-card .startup-card-header i {
+            background: #ffe082;
+            color: #f57c00;
+        }
+
+        .benefits-card li i {
+            color: var(--primary-orange);
+        }
+
+        .benefits-card ul {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .step-num {
+            background: var(--primary-green);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .startup-highlight {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            padding: 30px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .startup-highlight i {
+            font-size: 3rem;
+            color: #1976d2;
+            flex-shrink: 0;
+        }
+
+        .startup-highlight p {
+            color: #1565c0;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .startup-cta-btn {
+            display: block;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 22px 40px;
+            background: linear-gradient(135deg, var(--primary-green), #2e7d32);
+            color: white;
+            text-align: center;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(46, 125, 50, 0.3);
+        }
+
+        .startup-cta-btn:hover {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(46, 125, 50, 0.4);
+        }
+
+        .startup-cta-btn i {
+            margin-right: 12px;
+        }
+
+        /* Stats Section */
+        .startup-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 10px;
+        }
+
+        .stat-card h4 {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .startup-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .startup-header h1 {
+                font-size: 2rem;
+            }
+
+            .startup-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .startup-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-card {
+                grid-column: span 1;
+            }
+
+            .benefits-card ul {
+                grid-template-columns: 1fr;
+            }
+
+            .startup-badge {
+                width: 80px;
+                height: 80px;
+            }
+
+            .startup-badge i {
+                font-size: 2.2rem;
+            }
+
+            .startup-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .startup-highlight {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .startup-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="startup-page">
+        <div class="startup-container">
+            <!-- Back Button -->
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+
+            <!-- Header -->
+            <div class="startup-header">
+                <div class="startup-badge">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h1>Startup India</h1>
+                <p class="startup-subtitle">Empowering Innovation & Entrepreneurship</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="startup-stats">
+                <div class="stat-card">
+                    <i class="fas fa-building"></i>
+                    <h4>80,000+</h4>
+                    <p>Recognized Startups</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-rupee-sign"></i>
+                    <h4>₹10,000 Cr</h4>
+                    <p>Fund of Funds</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h4>7 Lakh+</h4>
+                    <p>Jobs Created</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>650+</h4>
+                    <p>Districts Covered</p>
+                </div>
+            </div>
+
+            <!-- Overview -->
+            <div class="startup-overview">
+                <p><i class="fas fa-info-circle" style="margin-right: 10px;"></i> Startup India is a Government of India initiative that supports startups through funding access, tax benefits, regulatory ease, and ecosystem support. It is managed by DPIIT under the Ministry of Commerce & Industry.</p>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="startup-grid">
+                <div class="startup-card">
+                    <div class="startup-card-header">
+                        <i class="fas fa-bullseye"></i>
+                        <h3>Objectives</h3>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Simplify regulations</li>
+                        <li><i class="fas fa-check-circle"></i> Enable funding & market access</li>
+                        <li><i class="fas fa-check-circle"></i> Promote innovation and job creation</li>
+                        <li><i class="fas fa-check-circle"></i> Build a strong startup ecosystem</li>
+                    </ul>
+                </div>
+
+                <div class="startup-card">
+                    <div class="startup-card-header">
+                        <i class="fas fa-user-check"></i>
+                        <h3>Eligibility</h3>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Incorporated in India (Pvt Ltd / LLP / Partnership)</li>
+                        <li><i class="fas fa-check-circle"></i> Within 10 years of incorporation</li>
+                        <li><i class="fas fa-check-circle"></i> Annual turnover ≤ ₹100 crore</li>
+                        <li><i class="fas fa-check-circle"></i> Innovative and scalable business model</li>
+                    </ul>
+                </div>
+
+                <div class="startup-card benefits-card">
+                    <div class="startup-card-header">
+                        <i class="fas fa-gift"></i>
+                        <h3>Key Benefits</h3>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-star"></i> 100% tax exemption for 3 years</li>
+                        <li><i class="fas fa-star"></i> Angel Tax exemption</li>
+                        <li><i class="fas fa-star"></i> ₹10,000 crore Fund of Funds via SIDBI</li>
+                        <li><i class="fas fa-star"></i> Self-certification for labour & environmental laws</li>
+                        <li><i class="fas fa-star"></i> 80% rebate on patent filing</li>
+                        <li><i class="fas fa-star"></i> Access to government tenders & GeM</li>
+                    </ul>
+                </div>
+
+                <div class="startup-card">
+                    <div class="startup-card-header">
+                        <i class="fas fa-clipboard-list"></i>
+                        <h3>Registration Steps</h3>
+                    </div>
+                    <ol>
+                        <li><span class="step-num">1</span> Visit startupindia.gov.in</li>
+                        <li><span class="step-num">2</span> Create an account</li>
+                        <li><span class="step-num">3</span> Apply for DPIIT Recognition</li>
+                        <li><span class="step-num">4</span> Receive Startup Certificate</li>
+                    </ol>
+                </div>
+
+                <div class="startup-card">
+                    <div class="startup-card-header">
+                        <i class="fas fa-hands-helping"></i>
+                        <h3>Support Programs</h3>
+                    </div>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Startup India Seed Fund Scheme</li>
+                        <li><i class="fas fa-check-circle"></i> Credit Guarantee Scheme</li>
+                        <li><i class="fas fa-check-circle"></i> Incubator Support</li>
+                        <li><i class="fas fa-check-circle"></i> Mentorship Programs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Highlight -->
+            <div class="startup-highlight">
+                <i class="fas fa-lightbulb"></i>
+                <p><strong>Highlight:</strong> Startup India helps Indian startups grow faster with tax benefits, funding support, and easier compliance. Join the movement to make India a global startup hub!</p>
+            </div>
+
+            <!-- CTA Button -->
+            <a href="https://www.startupindia.gov.in/" target="_blank" class="startup-cta-btn">
+                <i class="fas fa-external-link-alt"></i> Visit Startup India Portal
+            </a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

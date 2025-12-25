@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Swadeshi Vyapar - Discover authentic Indian products. Support local artisans and embrace self-reliant India.">
+    <meta name="keywords" content="Swadeshi, Indian products, handicrafts, textiles, spices, made in India">
+    <title>Swadeshi Vyapar - The Foundation of a Self-Reliant India</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <!-- Hamburger Menu (Mobile) -->
+            <div class="hamburger" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Swadeshi Vyapar Logo">
+                <span class="logo-text">Swadeshi Vyapar</span>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" placeholder="Search products, brands, categories..." id="headerSearch">
+                <label class="image-search-btn" title="Search by image">
+                    <i class="fas fa-camera"></i>
+                    <input type="file" accept="image/*" class="image-search-input">
+                </label>
+                <button class="search-btn" onclick="performSearch(document.getElementById('headerSearch').value)"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <!-- Header Navigation -->
+            <nav class="header-nav">
+                <a href="#about-section" class="nav-link" onclick="event.preventDefault(); document.getElementById('about-section').scrollIntoView({behavior: 'smooth'});"><i class="fas fa-info-circle"></i> About</a>
+                <a href="#artisan-section" class="nav-link" onclick="event.preventDefault(); document.getElementById('artisan-section').scrollIntoView({behavior: 'smooth'});"><i class="fas fa-users"></i> Artisans</a>
+            </nav>
+            
+            <!-- Header Icons -->
+            <div class="header-icons">
+                <!-- Profile Link - Opens Full Page -->
+                <a href="profile.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span class="label">Profile</span>
+                </a>
+                        <div class="profile-stats">
+                <!-- Startup India - Opens Full Page -->
+                <a href="startup.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-rocket"></i></span>
+                    <span class="label">Startup</span>
+                </a>
+                <!-- Cart -->
+                <a href="cart.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="label">Cart</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Filter Sidebar -->
+    <aside class="filter-sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-compass"></i> Explore</h3>
+            <button class="close-sidebar" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <!-- HOME Button -->
+        <div class="sidebar-home">
+            <a href="index.html" class="home-btn">
+                <i class="fas fa-home"></i> HOME
+            </a>
+        </div>
+        
+        <div class="filter-section">
+            <h4><i class="fas fa-th-large"></i> Categories</h4>
+            <ul>
+                <li onclick="window.location.href='category.html?type=textiles'"><i class="fas fa-tshirt"></i> Textiles</li>
+                <li onclick="window.location.href='category.html?type=spices'"><i class="fas fa-pepper-hot"></i> Spices</li>
+                <li onclick="window.location.href='category.html?type=handicrafts'"><i class="fas fa-paint-brush"></i> Handicrafts</li>
+                <li onclick="window.location.href='category.html?type=utsav'"><i class="fas fa-fire"></i> Utsav</li>
+                <li onclick="window.location.href='category.html?type=jewellery'"><i class="fas fa-gem"></i> Jewellery</li>
+                <li onclick="window.location.href='category.html?type=electronics'"><i class="fas fa-mobile-alt"></i> Electronics</li>
+                <li onclick="window.location.href='category.html?type=arts'"><i class="fas fa-palette"></i> Arts</li>
+            </ul>
+        </div>
+        
+        <div class="filter-section">
+            <h4><i class="fas fa-map-marked-alt"></i> Discover by Region</h4>
+            <div class="region-selector">
+                <select class="region-dropdown" id="stateFilter">
+                    <option value="">Select State</option>
+                    <option value="uttar pradesh">Uttar Pradesh</option>
+                    <option value="gujarat">Gujarat</option>
+                    <option value="kashmir">Kashmir</option>
+                    <option value="kerala">Kerala</option>
+                    <option value="maharashtra">Maharashtra</option>
+                    <option value="rajasthan">Rajasthan</option>
+                    <option value="tamil nadu">Tamil Nadu</option>
+                    <option value="west bengal">West Bengal</option>
+                    <option value="karnataka">Karnataka</option>
+                    <option value="tripura">Tripura</option>
+                    <option value="odisha">Odisha</option>
+                    <option value="bihar">Bihar</option>
+                </select>
+                <select class="region-dropdown" id="craftFilter">
+                    <option value="">Select Craft Type</option>
+                    <option value="textiles">Traditional Textiles</option>
+                    <option value="pottery">Pottery & Ceramics</option>
+                    <option value="woodwork">Wood Craft</option>
+                    <option value="metalwork">Metal Work</option>
+                    <option value="embroidery">Embroidery</option>
+                </select>
+            </div>
+            <div class="location-detect">
+                <button class="detect-btn" onclick="detectLocation()">
+                    <i class="fas fa-location-crosshairs"></i> Detect My Location
+                </button>
+            </div>
+        </div>
+        
+        <div class="filter-section">
+            <h4><i class="fas fa-leaf"></i> Eco Rating</h4>
+            <div class="eco-range">
+                <input type="range" min="0" max="100" value="0" id="ecoFilter">
+                <div class="range-values">
+                    <span>Min: <span class="current-value">0%</span></span>
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="filter-section">
+            <button class="clear-filters" onclick="clearAllFilters()"><i class="fas fa-sync-alt"></i> Clear All Filters</button>
+        </div>
+    </aside>
+
+    <!-- Filter Toggle Button -->
+    <button class="filter-toggle-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Swadeshi Vyapar</h1>
+            <p>The Foundation of a Self-Reliant India</p>
+            <a href="category.html" class="hero-btn">Explore Indian Brands <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Main Search Section -->
+    <section class="search-section">
+        <div class="main-search">
+            <input type="text" placeholder="Search for products, artisans, or regions..." id="mainSearch">
+            <button class="image-upload-btn" title="Search by image">
+                <i class="fas fa-camera"></i>
+                <input type="file" accept="image/*" class="image-search-input">
+            </button>
+            <button class="search-btn" onclick="performSearch(document.getElementById('mainSearch').value)"><i class="fas fa-search"></i> Search</button>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Shop by Category</h2>
+                <p>Explore authentic Indian products across various categories</p>
+            </div>
+            <div class="categories-grid">
+                <!-- Categories will be loaded dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Impact Prediction Dashboard -->
+    <section class="impact-dashboard">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-chart-line"></i> Future Impact Prediction</h2>
+                <p>Your shopping choices will help build a sustainable India</p>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon green-bg">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="impact-label future-label">You Will Earn</div>
+                    <div class="impact-value" id="totalEpoints">500+</div>
+                    <div class="impact-sublabel">E-Points on First Order</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon orange-bg">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="impact-label future-label">You Will Save</div>
+                    <div class="impact-value" id="totalCO2">2.5 kg</div>
+                    <div class="impact-sublabel">CO₂ Emissions Per Order</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon green-bg">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <div class="impact-label future-label">You Will Avoid</div>
+                    <div class="impact-value" id="totalPlastic">500 gm</div>
+                    <div class="impact-sublabel">Plastic Waste Per Order</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon orange-bg">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="impact-label future-label">You Will Support</div>
+                    <div class="impact-value" id="artisansSupported">1+</div>
+                    <div class="impact-sublabel">Artisan Family Directly</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Products</h2>
+                <p>Handpicked treasures from across India</p>
+            </div>
+            <div class="products-grid">
+                <!-- Products will be loaded dynamically by JS -->
+            </div>
+            <div class="text-center mt-20">
+                <a href="category.html" class="btn btn-primary" style="display: inline-block; padding: 15px 40px;">View All Products →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Swadeshi Section -->
+    <section class="why-swadeshi-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Swadeshi?</h2>
+                <p>Support local artisans and build a self-reliant nation</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-flag"></i>
+                    </div>
+                    <h3>Made in India</h3>
+                    <p>100% authentic Indian products sourced directly from artisans</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon green">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Eco-Friendly</h3>
+                    <p>Sustainable products with transparent eco ratings</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>E-Points Rewards</h3>
+                    <p>Earn points for every eco-friendly purchase</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon green">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Support Artisans</h3>
+                    <p>Direct support to local craftsmen and their families</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- E-Points Benefits Section -->
+    <section class="epoints-benefits-section">
+        <div class="container">
+            <div class="section-title light">
+                <h2>E-Points Benefits</h2>
+                <p>Turn your eco-conscious shopping into real rewards</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-percentage"></i></div>
+                    <h4>Discounts</h4>
+                    <p>Redeem points for exclusive discounts</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-truck"></i></div>
+                    <h4>Free Shipping</h4>
+                    <p>Use points for free delivery</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-gift"></i></div>
+                    <h4>Exclusive Gifts</h4>
+                    <p>Unlock special artisan gifts</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"><i class="fas fa-tree"></i></div>
+                    <h4>Plant Trees</h4>
+                    <p>Donate points to plant trees</p>
+                </div>
+            </div>
+            <div class="badges-showcase">
+                <h4><i class="fas fa-trophy"></i> Earn Badges & Achievements</h4>
+                <div class="badge-list">
+                    <div class="badge-item">
+                        <div class="badge-icon green"><i class="fas fa-shopping-bag"></i></div>
+                        <span class="badge-name">First Buy</span>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon orange"><i class="fas fa-leaf"></i></div>
+                        <span class="badge-name">Eco Warrior</span>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon green"><i class="fas fa-users"></i></div>
+                        <span class="badge-name">Artisan Friend</span>
+                    </div>
+                    <div class="badge-item">
+                        <div class="badge-icon orange"><i class="fas fa-crown"></i></div>
+                        <span class="badge-name">Swadeshi Pro</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artisan Stories Section -->
+    <section class="artisan-section" id="artisan-section">
+        <div class="container">
+            <div class="section-title">
+                <h2><i class="fas fa-users"></i> Meet Our Artisans</h2>
+                <p>The skilled hands behind your favorite products</p>
+            </div>
+            <div class="artisan-grid">
+                <div class="artisan-card">
+                    <div class="artisan-image">
+                        <img src="https://vandanasarees.com/cdn/shop/files/banarasi_sarees_manufacturer_in_varanasi.jpg?v=1757625827&width=2400" alt="Artisan - Ramesh Kumar">
+                    </div>
+                    <div class="artisan-info">
+                        <h4>Ramesh Kumar</h4>
+                        <p class="artisan-craft"><i class="fas fa-tshirt"></i> Banarasi Silk Weaver</p>
+                        <p class="artisan-location"><i class="fas fa-map-marker-alt"></i> Varanasi, Uttar Pradesh</p>
+                        <p class="artisan-story">"My family has been weaving Banarasi silk for 5 generations. Each saree takes 15-45 days to complete."</p>
+                        <p class="artisan-contact"><i class="fas fa-phone"></i> +91 9876-543-210</p>
+                        <span class="artisan-badge"><i class="fas fa-certificate"></i> Verified Artisan</span>
+                    </div>
+                </div>
+                <div class="artisan-card">
+                    <div class="artisan-image">
+                        <img src="https://images.stockcake.com/public/5/e/e/5eef2c96-c9a1-407d-8391-908ce65000dd_large/artisan-painting-pottery-stockcake.jpg" alt="Artisan - Lakshmi Devi">
+                    </div>
+                    <div class="artisan-info">
+                        <h4>Lakshmi Devi</h4>
+                        <p class="artisan-craft"><i class="fas fa-paint-brush"></i> Blue Pottery Artist</p>
+                        <p class="artisan-location"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</p>
+                        <p class="artisan-story">"Blue pottery is not just art, it's our heritage. I learned this craft from my mother."</p>
+                        <p class="artisan-contact"><i class="fas fa-phone"></i> +91 9123-456-789</p>
+                        <span class="artisan-badge"><i class="fas fa-certificate"></i> Verified Artisan</span>
+                    </div>
+                </div>
+                <div class="artisan-card">
+                    <div class="artisan-image">
+                        <img src="https://diamondrensu.com/cdn/shop/files/anil_1.jpg?v=1723895973&width=750" alt="Artisan - Mohammed Ashraf">
+                    </div>
+                    <div class="artisan-info">
+                        <h4>Mohammed Ashraf</h4>
+                        <p class="artisan-craft"><i class="fas fa-ring"></i> Kundan Jewelry Master</p>
+                        <p class="artisan-location"><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan</p>
+                        <p class="artisan-story">"Each Kundan piece is a labor of love, taking weeks of careful craftsmanship."</p>
+                        <p class="artisan-contact"><i class="fas fa-phone"></i> +91 9988-776-655</p>
+                        <span class="artisan-badge"><i class="fas fa-certificate"></i> Verified Artisan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about-section">
+        <div class="about-content">
+            <div class="about-text">
+                <span class="about-badge"><i class="fas fa-flag"></i> Made in India</span>
+                <h2>Swadeshi Vyapar</h2>
+                <p class="about-tagline">The Foundation of a Self-Reliant India</p>
+                <p class="about-description">
+                    Swadeshi Vyapar is more than just an e-commerce platform. We are a movement dedicated to reviving India's rich heritage of craftsmanship while building a sustainable future.
+                </p>
+                <p class="about-description">
+                    Every purchase you make directly supports local artisans, preserves traditional crafts, and contributes to reducing our carbon footprint.
+                </p>
+                <div class="about-motives">
+                    <h4><i class="fas fa-bullseye"></i> Our Mission</h4>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Empower 10,000+ artisans by 2026</li>
+                        <li><i class="fas fa-check-circle"></i> 100% eco-friendly packaging</li>
+                        <li><i class="fas fa-check-circle"></i> Carbon-neutral delivery network</li>
+                        <li><i class="fas fa-check-circle"></i> Preserve 50+ traditional crafts</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600" alt="India Heritage - Taj Mahal">
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="stat-num">350+</span>
+                        <span class="stat-text">Artisans</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">28</span>
+                        <span class="stat-text">States</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-num">50+</span>
+                        <span class="stat-text">Crafts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Swadeshi Vyapar</h4>
+                <p>Building a self-reliant India by connecting you with authentic Indian products and skilled artisans.</p>
+                <div style="margin-top: 15px; display: flex; gap: 15px;">
+                    <a href="#" style="color: var(--white); font-size: 1.3rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: var(--white); font-size: 1.3rem;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" style="color: var(--white); font-size: 1.3rem;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: var(--white); font-size: 1.3rem;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="category.html"><i class="fas fa-th-large"></i> All Products</a></li>
+                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+                    <li><a href="checkout.html"><i class="fas fa-credit-card"></i> Checkout</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="category.html?type=textiles"><i class="fas fa-tshirt"></i> Textiles</a></li>
+                    <li><a href="category.html?type=spices"><i class="fas fa-pepper-hot"></i> Spices</a></li>
+                    <li><a href="category.html?type=handicrafts"><i class="fas fa-paint-brush"></i> Handicrafts</a></li>
+                    <li><a href="category.html?type=jewellery"><i class="fas fa-gem"></i> Jewellery</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@swadeshivyapar.in</li>
+                    <li><i class="fas fa-phone"></i> +91 1800-XXX-XXXX</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Pusad , MH, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Swadeshi Vyapar. Made with <i class="fas fa-heart" style="color: #e74c3c;"></i> in India. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Toggle sidebar
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.filter-sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Clear all filters
+        function clearAllFilters() {
+            document.querySelectorAll('.region-filter input').forEach(cb => cb.checked = false);
+            document.getElementById('ecoFilter').value = 0;
+            document.querySelector('.eco-range .current-value').textContent = '0%';
+        }
+
+        // Eco filter display update
+        document.getElementById('ecoFilter').addEventListener('input', function() {
+            document.querySelector('.eco-range .current-value').textContent = this.value + '%';
+        });
+
+        // Region filter - State dropdown
+        document.getElementById('stateFilter').addEventListener('change', function() {
+            const selectedRegion = this.value;
+            if (selectedRegion) {
+                // Navigate to category page with region parameter
+                window.location.href = `category.html?region=${encodeURIComponent(selectedRegion)}`;
+            }
+        });
+
+        // Region filter - Craft type dropdown
+        document.getElementById('craftFilter').addEventListener('change', function() {
+            const selectedCraft = this.value;
+            if (selectedCraft) {
+                // Navigate to category page with category parameter
+                window.location.href = `category.html?type=${selectedCraft}`;
+            }
+        });
+
+        // Detect location function
+        function detectLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        showToast('Location detected! Showing nearby artisans.', 'success');
+                    },
+                    (error) => {
+                        showToast('Unable to detect location. Please select manually.', 'error');
+                    }
+                );
+            } else {
+                showToast('Geolocation is not supported by your browser.', 'error');
+            }
+        }
+
+        // Load featured products (random 6)
+        document.addEventListener('DOMContentLoaded', function() {
+            const productsGrid = document.querySelector('.products-section .products-grid');
+            if (productsGrid && typeof products !== 'undefined') {
+                const shuffled = [...products].sort(() => 0.5 - Math.random());
+                const featured = shuffled.slice(0, 6);
+                
+                productsGrid.innerHTML = featured.map(product => `
+                    <div class="product-card" data-id="${product.id}">
+                        <a href="product.html?id=${product.id}" class="product-image">
+                            <img src="${product.image}" alt="${product.name}" loading="lazy">
+                            <span class="eco-badge"><i class="fas fa-leaf"></i> ${product.ecoRating}%</span>
+                        </a>
+                        <div class="product-info">
+                            <h3><a href="product.html?id=${product.id}">${product.name}</a></h3>
+                            <p class="product-region"><i class="fas fa-map-marker-alt"></i> ${product.region}</p>
+                            <p class="product-price">₹${product.price.toLocaleString('en-IN')}</p>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary" onclick="addToCart(${product.id})"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                <a href="product.html?id=${product.id}" class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Update E-Points display from localStorage
+            const userEpoints = localStorage.getItem('epoints') || 0;
+            document.querySelectorAll('.epoints-value').forEach(el => el.textContent = userEpoints);
+            
+            // Calculate CO2 saved (estimate: 0.5kg per 100 epoints)
+            const co2Saved = ((userEpoints * 0.5) / 100).toFixed(1);
+            document.querySelectorAll('.co2-saved').forEach(el => el.textContent = co2Saved + ' kg');
+        });
+    </script>
+</body>
+</html>

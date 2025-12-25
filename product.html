@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Product details at Swadeshi Vyapar">
+    <title>Product Details - Swadeshi Vyapar</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        
+        .breadcrumb {
+            padding: 15px 20px;
+            background: var(--white);
+            border-bottom: 1px solid var(--light-bg);
+        }
+        
+        .breadcrumb a {
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        
+        .breadcrumb a:hover {
+            color: var(--primary-orange);
+        }
+        
+        .breadcrumb span {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        
+        .related-products {
+            padding: 60px 20px;
+            background: var(--light-bg);
+        }
+        
+        .related-products .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 1024px) {
+            .related-products .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .related-products .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <!-- Hamburger Menu (Mobile) -->
+            <div class="hamburger" onclick="history.back()">
+                <span><i class="fas fa-arrow-left"></i></span>
+            </div>
+            
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Swadeshi Vyapar Logo">
+                <span class="logo-text">Swadeshi Vyapar</span>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" placeholder="Search products, brands, categories..." id="headerSearch">
+                <label class="image-search-btn" title="Search by image">
+                    <i class="fas fa-camera"></i>
+                    <input type="file" accept="image/*" class="image-search-input">
+                </label>
+                <button class="search-btn" onclick="performSearch(document.getElementById('headerSearch').value)"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <!-- Header Icons -->
+            <div class="header-icons">
+                <!-- Profile Link -->
+                <a href="profile.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span class="label">Profile</span>
+                </a>
+                
+                <!-- Cart -->
+                <a href="cart.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="label">Cart</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="container">
+            <a href="index.html">Home</a> / 
+            <a href="category.html">Products</a> / 
+            <span id="productName">Product Details</span>
+        </div>
+    </nav>
+
+    <!-- Product Details Section -->
+    <section class="product-details">
+        <div class="product-details-container">
+            <!-- Content loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Related Products</h2>
+                <p>You might also like these</p>
+            </div>
+            <div class="products-grid" id="relatedProducts">
+                <!-- Related products loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Swadeshi Vyapar</h4>
+                <p>Building a self-reliant India by connecting you with authentic Indian products and skilled artisans.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="category.html">All Products</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="category.html?type=textiles">Textiles</a></li>
+                    <li><a href="category.html?type=spices">Spices</a></li>
+                    <li><a href="category.html?type=handicrafts">Handicrafts</a></li>
+                    <li><a href="category.html?type=jewellery">Jewellery</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>📧 support@swadeshivyapar.in</li>
+                    <li>📞 +91 1800-XXX-XXXX</li>
+                    <li>📍 Pusad , MH, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Swadeshi Vyapar. Made with ❤️ in India. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProductDetails();
+            loadRelatedProducts();
+        });
+
+        function loadProductDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            if (!productId || typeof products === 'undefined') {
+                window.location.href = 'category.html';
+                return;
+            }
+
+            const product = products.find(p => p.id === parseInt(productId));
+            if (!product) {
+                window.location.href = 'category.html';
+                return;
+            }
+
+            // Update page title and breadcrumb
+            document.title = `${product.name} - Swadeshi Vyapar`;
+            document.getElementById('productName').textContent = product.name;
+
+            const container = document.querySelector('.product-details-container');
+            if (container) {
+                // Extra details only for Banarasi Silk Saree (id: 1)
+                const extraDetails = product.id === 1 ? `
+                    <div style="margin-top: 20px; padding: 20px; background: #fff8e1; border-radius: 12px; border-left: 4px solid #ff9800;">
+                        <h4 style="color: #e65100; margin-bottom: 15px; font-size: 1.1rem;">
+                            <i class="fas fa-leaf" style="color: #4caf50;"></i> Carbon Mitigation
+                        </h4>
+                        <p style="color: #5d4037; font-size: 0.95rem; margin-bottom: 10px;">
+                            <strong>Low Chemical Usage</strong>
+                        </p>
+                        <p style="color: #6d4c41; font-size: 0.9rem; line-height: 1.6;">
+                            For every 1kg of silk produced, the ecosystem removes <strong>735kg of CO₂</strong>
+                        </p>
+                    </div>
+                    <div style="margin-top: 15px; padding: 15px; background: #e8f5e9; border-radius: 10px;">
+                        <h4 style="color: #2e7d32; margin-bottom: 10px;">
+                            <i class="fas fa-user-tie"></i> Contact Artisan
+                        </h4>
+                        <p style="color: #388e3c; font-size: 0.9rem;">
+                            <i class="fas fa-phone"></i> +91 9876-XXX-XXX<br>
+                            <i class="fas fa-map-marker-alt"></i> Varanasi, Uttar Pradesh
+                        </p>
+                    </div>
+                ` : '';
+
+                container.innerHTML = `
+                    <div class="product-gallery">
+                        <img src="${product.image}" alt="${product.name}">
+                        ${extraDetails}
+                    </div>
+                    <div class="product-detail-info">
+                        <h1>${product.name}</h1>
+                        <p class="product-detail-region">📍 ${product.region}</p>
+                        <p class="product-detail-price">₹${product.price.toLocaleString('en-IN')}</p>
+                        <p class="product-description">${product.description}</p>
+                        
+                        <div class="eco-rating-section">
+                            <h4>🌱 Eco Rating</h4>
+                            <div class="eco-bar">
+                                <span style="width: ${product.ecoRating}%"></span>
+                            </div>
+                            <div class="eco-rating-value">
+                                <span>Eco Score: ${product.ecoRating}%</span>
+                                <span>E-Points: +${Math.floor(product.ecoRating / 10)}</span>
+                            </div>
+                        </div>
+                        
+                        <div style="background: #f0f9f0; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                            <p style="color: #1B5E20; font-size: 0.95rem;">
+                                🌿 <strong>Sustainability Note:</strong> By purchasing this product, you're supporting local artisans and contributing to a sustainable India.
+                            </p>
+                        </div>
+                        
+                        <div class="product-detail-actions">
+                            <button class="btn btn-secondary" onclick="addToCart(${product.id})" style="flex: 1;">
+                                🛒 Add to Cart
+                            </button>
+                            <a href="checkout.html?buy=${product.id}" class="btn btn-primary" style="flex: 1; text-align: center;">
+                                ⚡ Buy Now
+                            </a>
+                        </div>
+                        
+                        <div style="margin-top: 20px; padding: 15px; background: var(--light-bg); border-radius: 10px;">
+                            <p style="font-size: 0.9rem; color: var(--text-light);">
+                                📦 Free shipping on orders above ₹500<br>
+                                🔄 Easy 7-day returns<br>
+                                ✅ 100% Authentic Product
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function loadRelatedProducts() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            if (!productId || typeof products === 'undefined') return;
+
+            const currentProduct = products.find(p => p.id === parseInt(productId));
+            if (!currentProduct) return;
+
+            // Get products from same category, excluding current
+            const related = products
+                .filter(p => p.category === currentProduct.category && p.id !== currentProduct.id)
+                .slice(0, 4);
+
+            // If not enough, add from other categories
+            if (related.length < 4) {
+                const others = products
+                    .filter(p => p.id !== currentProduct.id && !related.includes(p))
+                    .slice(0, 4 - related.length);
+                related.push(...others);
+            }
+
+            const container = document.getElementById('relatedProducts');
+            if (container) {
+                container.innerHTML = related.map(product => `
+                    <div class="product-card" data-id="${product.id}">
+                        <a href="product.html?id=${product.id}" class="product-image">
+                            <img src="${product.image}" alt="${product.name}" loading="lazy">
+                            <span class="eco-badge">🌱 ${product.ecoRating}%</span>
+                        </a>
+                        <div class="product-info">
+                            <h3><a href="product.html?id=${product.id}">${product.name}</a></h3>
+                            <p class="product-region">📍 ${product.region}</p>
+                            <p class="product-price">₹${product.price.toLocaleString('en-IN')}</p>
+                            <div class="product-actions">
+                                <button class="btn btn-secondary" onclick="addToCart(${product.id})">Add to Cart</button>
+                                <a href="product.html?id=${product.id}" class="btn btn-primary">View</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+    </script>
+</body>
+</html>

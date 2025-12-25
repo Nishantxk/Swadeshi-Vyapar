@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your shopping cart at Swadeshi Vyapar">
+    <title>Cart - Swadeshi Vyapar</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        
+        .page-header {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            opacity: 0.9;
+        }
+        
+        .eco-info {
+            font-size: 0.85rem;
+            color: var(--primary-green);
+            margin-top: 5px;
+        }
+        
+        .continue-shopping {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: var(--gradient);
+            color: var(--white);
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .continue-shopping:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Swadeshi Vyapar Logo">
+                <span class="logo-text">Swadeshi Vyapar</span>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" placeholder="Search products, brands, categories..." id="headerSearch">
+                <label class="image-search-btn" title="Search by image">
+                    <i class="fas fa-camera"></i>
+                    <input type="file" accept="image/*" class="image-search-input">
+                </label>
+                <button class="search-btn" onclick="performSearch(document.getElementById('headerSearch').value)"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <!-- Header Icons -->
+            <div class="header-icons">
+                <!-- Profile Link -->
+                <a href="profile.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span class="label">Profile</span>
+                </a>
+                
+                <!-- Cart -->
+                <a href="cart.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="label">Cart</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-shopping-cart"></i> Your Cart</h1>
+        <p>Review your items before checkout</p>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <!-- Empty Cart State -->
+        <div class="empty-cart" style="display: none;">
+            <div class="icon"><i class="fas fa-shopping-cart" style="font-size: 4rem;"></i></div>
+            <h2>Your cart is empty</h2>
+            <p>Looks like you haven't added any products yet.</p>
+            <a href="category.html" class="continue-shopping">Start Shopping <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Cart Content -->
+        <div class="cart-container">
+            <!-- Cart Items -->
+            <div class="cart-items">
+                <h2><i class="fas fa-shopping-bag"></i> Cart Items (<span class="summary-items-count">0</span>)</h2>
+                <div class="cart-items-list">
+                    <!-- Cart items loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-summary">
+                <h3><i class="fas fa-file-invoice"></i> Order Summary</h3>
+                
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span class="summary-subtotal">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span class="summary-shipping">₹0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span class="summary-total">₹0</span>
+                </div>
+                
+                <div class="epoints-earned">
+                    <p>🌱 You'll earn</p>
+                    <span>+0</span>
+                    <p>E-Points with this order!</p>
+                </div>
+                
+                <a href="checkout.html" class="checkout-btn">Proceed to Checkout →</a>
+                
+                <div style="text-align: center; margin-top: 15px;">
+                    <a href="category.html" style="color: var(--text-light); font-size: 0.9rem;">← Continue Shopping</a>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: var(--light-bg); border-radius: 10px;">
+                    <p style="font-size: 0.85rem; color: var(--text-light);">
+                        📦 Free shipping on orders above ₹500<br>
+                        🔒 Secure checkout<br>
+                        ✅ 100% Authentic Products
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Swadeshi Vyapar</h4>
+                <p>Building a self-reliant India by connecting you with authentic Indian products and skilled artisans.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="category.html">All Products</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="checkout.html">Checkout</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="category.html?type=textiles">Textiles</a></li>
+                    <li><a href="category.html?type=spices">Spices</a></li>
+                    <li><a href="category.html?type=handicrafts">Handicrafts</a></li>
+                    <li><a href="category.html?type=jewellery">Jewellery</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>📧 support@swadeshivyapar.in</li>
+                    <li>📞 +91 1800-XXX-XXXX</li>
+                    <li>📍 Pusad , MH, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Swadeshi Vyapar. Made with ❤️ in India. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

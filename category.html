@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse products by category at Swadeshi Vyapar">
+    <title>Products - Swadeshi Vyapar</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <!-- Hamburger Menu (Mobile) -->
+            <div class="hamburger" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Swadeshi Vyapar Logo">
+                <span class="logo-text">Swadeshi Vyapar</span>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" placeholder="Search products, brands, categories..." id="headerSearch">
+                <label class="image-search-btn" title="Search by image">
+                    <i class="fas fa-camera"></i>
+                    <input type="file" accept="image/*" class="image-search-input">
+                </label>
+                <button class="search-btn" onclick="performSearch(document.getElementById('headerSearch').value)"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <!-- Header Icons -->
+            <div class="header-icons">
+                <!-- Profile Link -->
+                <a href="profile.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span class="label">Profile</span>
+                </a>
+                
+                <!-- Cart -->
+                <a href="cart.html" class="header-icon">
+                    <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                    <span class="label">Cart</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Filter Sidebar -->
+    <aside class="filter-sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-search"></i> Filter Products</h3>
+            <button class="close-sidebar" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <!-- HOME Button -->
+        <div class="sidebar-home">
+            <a href="index.html" class="home-btn">
+                <i class="fas fa-home"></i> HOME
+            </a>
+        </div>
+        
+        <div class="filter-section">
+            <h4><i class="fas fa-th-large"></i> Categories</h4>
+            <ul>
+                <li class="category-filter-item active" data-category="all"><i class="fas fa-border-all"></i> All Products</li>
+                <li class="category-filter-item" data-category="textiles"><i class="fas fa-tshirt"></i> Textiles</li>
+                <li class="category-filter-item" data-category="spices"><i class="fas fa-pepper-hot"></i> Spices</li>
+                <li class="category-filter-item" data-category="handicrafts"><i class="fas fa-paint-brush"></i> Handicrafts</li>
+                <li class="category-filter-item" data-category="utsav"><i class="fas fa-fire"></i> Utsav</li>
+                <li class="category-filter-item" data-category="jewellery"><i class="fas fa-gem"></i> Jewellery</li>
+                <li class="category-filter-item" data-category="electronics"><i class="fas fa-mobile-alt"></i> Electronics</li>
+                <li class="category-filter-item" data-category="arts"><i class="fas fa-palette"></i> Arts</li>
+            </ul>
+        </div>
+        
+        <div class="filter-section">
+            <h4><i class="fas fa-map-marker-alt"></i> Region</h4>
+            <ul class="region-filter">
+                <li><input type="checkbox" value="uttar pradesh" id="r1"> <label for="r1">Uttar Pradesh</label></li>
+                <li><input type="checkbox" value="gujarat" id="r2"> <label for="r2">Gujarat</label></li>
+                <li><input type="checkbox" value="kashmir" id="r3"> <label for="r3">Kashmir</label></li>
+                <li><input type="checkbox" value="kerala" id="r4"> <label for="r4">Kerala</label></li>
+                <li><input type="checkbox" value="tamil nadu" id="r5"> <label for="r5">Tamil Nadu</label></li>
+                <li><input type="checkbox" value="maharashtra" id="r6"> <label for="r6">Maharashtra</label></li>
+                <li><input type="checkbox" value="rajasthan" id="r7"> <label for="r7">Rajasthan</label></li>
+                <li><input type="checkbox" value="west bengal" id="r8"> <label for="r8">West Bengal</label></li>
+                <li><input type="checkbox" value="odisha" id="r9"> <label for="r9">Odisha</label></li>
+                <li><input type="checkbox" value="karnataka" id="r10"> <label for="r10">Karnataka</label></li>
+                <li><input type="checkbox" value="tripura" id="r11"> <label for="r11">Tripura</label></li>
+                <li><input type="checkbox" value="bihar" id="r12"> <label for="r12">Bihar</label></li>
+            </ul>
+        </div>
+        
+        <div class="filter-section">
+            <h4><i class="fas fa-leaf"></i> Minimum Eco Rating</h4>
+            <div class="eco-range">
+                <input type="range" min="0" max="100" value="0">
+                <div class="range-values">
+                    <span>Min: <span class="current-value">0%</span></span>
+                    <span>100%</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="filter-section">
+            <button class="clear-filters"><i class="fas fa-sync-alt"></i> Clear All Filters</button>
+        </div>
+    </aside>
+
+    <!-- Filter Toggle Button -->
+    <button class="filter-toggle-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+
+    <!-- Main Content -->
+    <main class="products-section">
+        <div class="products-container container">
+            <!-- Desktop Sidebar -->
+            <aside class="products-sidebar">
+                <div class="sidebar-card">
+                    <h4><i class="fas fa-th-large"></i> Categories</h4>
+                    <ul>
+                        <li class="category-filter-item active" data-category="all"><i class="fas fa-border-all"></i> All Products</li>
+                        <li class="category-filter-item" data-category="textiles"><i class="fas fa-tshirt"></i> Textiles</li>
+                        <li class="category-filter-item" data-category="spices"><i class="fas fa-pepper-hot"></i> Spices</li>
+                        <li class="category-filter-item" data-category="handicrafts"><i class="fas fa-paint-brush"></i> Handicrafts</li>
+                        <li class="category-filter-item" data-category="utsav"><i class="fas fa-fire"></i> Utsav</li>
+                        <li class="category-filter-item" data-category="jewellery"><i class="fas fa-gem"></i> Jewellery</li>
+                        <li class="category-filter-item" data-category="electronics"><i class="fas fa-mobile-alt"></i> Electronics</li>
+                        <li class="category-filter-item" data-category="arts"><i class="fas fa-palette"></i> Arts</li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h4><i class="fas fa-map-marker-alt"></i> Region</h4>
+                    <ul class="region-filter">
+                        <li><input type="checkbox" value="uttar pradesh" id="dr1"> <label for="dr1">Uttar Pradesh</label></li>
+                        <li><input type="checkbox" value="gujarat" id="dr2"> <label for="dr2">Gujarat</label></li>
+                        <li><input type="checkbox" value="kashmir" id="dr3"> <label for="dr3">Kashmir</label></li>
+                        <li><input type="checkbox" value="kerala" id="dr4"> <label for="dr4">Kerala</label></li>
+                        <li><input type="checkbox" value="tamil nadu" id="dr5"> <label for="dr5">Tamil Nadu</label></li>
+                        <li><input type="checkbox" value="maharashtra" id="dr6"> <label for="dr6">Maharashtra</label></li>
+                        <li><input type="checkbox" value="rajasthan" id="dr7"> <label for="dr7">Rajasthan</label></li>
+                        <li><input type="checkbox" value="west bengal" id="dr8"> <label for="dr8">West Bengal</label></li>
+                        <li><input type="checkbox" value="odisha" id="dr9"> <label for="dr9">Odisha</label></li>
+                        <li><input type="checkbox" value="karnataka" id="dr10"> <label for="dr10">Karnataka</label></li>
+                        <li><input type="checkbox" value="tripura" id="dr11"> <label for="dr11">Tripura</label></li>
+                        <li><input type="checkbox" value="bihar" id="dr12"> <label for="dr12">Bihar</label></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h4><i class="fas fa-leaf"></i> Minimum Eco Rating</h4>
+                    <div class="eco-range">
+                        <input type="range" min="0" max="100" value="0">
+                        <div class="range-values">
+                            <span>Min: <span class="current-value">0%</span></span>
+                            <span>100%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="clear-filters btn-full"><i class="fas fa-sync-alt"></i> Clear Filters</button>
+            </aside>
+
+            <!-- Products Grid -->
+            <div class="products-main">
+                <div class="products-header">
+                    <h2>All Products</h2>
+                    <select class="sort-dropdown">
+                        <option value="default">Sort by: Default</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="eco-high">Eco Rating: High to Low</option>
+                        <option value="name">Name: A to Z</option>
+                    </select>
+                </div>
+                
+                <div class="products-grid">
+                    <!-- Products loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Swadeshi Vyapar</h4>
+                <p>Building a self-reliant India by connecting you with authentic Indian products and skilled artisans.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="category.html"><i class="fas fa-th-large"></i> All Products</a></li>
+                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+                    <li><a href="checkout.html"><i class="fas fa-credit-card"></i> Checkout</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="category.html?type=textiles">Textiles</a></li>
+                    <li><a href="category.html?type=spices">Spices</a></li>
+                    <li><a href="category.html?type=handicrafts">Handicrafts</a></li>
+                    <li><a href="category.html?type=jewellery">Jewellery</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>📧 support@swadeshivyapar.in</li>
+                    <li>📞 +91 1800-XXX-XXXX</li>
+                    <li>📍 Pusad , MH, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Swadeshi Vyapar. Made with ❤️ in India. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Toggle sidebar
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.filter-sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set active category from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryType = urlParams.get('type');
+            const regionParam = urlParams.get('region');
+            
+            // Update page title based on filters
+            const pageTitle = document.querySelector('.products-header h2');
+            if (pageTitle) {
+                if (regionParam) {
+                    // Capitalize region name
+                    const regionName = regionParam.split(' ')
+                        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(' ');
+                    pageTitle.textContent = `Products from ${regionName}`;
+                } else if (categoryType) {
+                    const categoryName = categoryType.charAt(0).toUpperCase() + categoryType.slice(1);
+                    pageTitle.textContent = categoryName;
+                } else {
+                    pageTitle.textContent = 'All Products';
+                }
+            }
+            
+            if (categoryType) {
+                document.querySelectorAll('.category-filter-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.category === categoryType) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+
+            // Category filter click
+            document.querySelectorAll('.category-filter-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    if (category === 'all') {
+                        window.location.href = 'category.html';
+                    } else {
+                        window.location.href = `category.html?type=${category}`;
+                    }
+                });
+            });
+
+            // Region filter change
+            document.querySelectorAll('.region-filter input').forEach(cb => {
+                cb.addEventListener('change', filterProducts);
+            });
+
+            // Eco range change
+            document.querySelectorAll('.eco-range input[type="range"]').forEach(range => {
+                range.addEventListener('input', function() {
+                    const display = this.parentElement.querySelector('.current-value');
+                    if (display) display.textContent = this.value + '%';
+                    filterProducts();
+                });
+            });
+
+            // Sort dropdown
+            const sortDropdown = document.querySelector('.sort-dropdown');
+            if (sortDropdown) {
+                sortDropdown.addEventListener('change', filterProducts);
+            }
+
+            // Clear filters
+            document.querySelectorAll('.clear-filters').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Reset checkboxes
+                    document.querySelectorAll('.region-filter input').forEach(cb => cb.checked = false);
+                    
+                    // Reset range
+                    document.querySelectorAll('.eco-range input[type="range"]').forEach(range => {
+                        range.value = 0;
+                        const display = range.parentElement.querySelector('.current-value');
+                        if (display) display.textContent = '0%';
+                    });
+
+                    // Reset sort
+                    if (sortDropdown) sortDropdown.value = 'default';
+
+                    filterProducts();
+                    showToast('Filters cleared');
+                });
+            });
+
+            // Initial load - filter products based on URL params
+            filterProducts();
+        });
+
+        // Filter products function
+        function filterProducts() {
+            let filtered = [...products];
+            
+            // Get URL params
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryType = urlParams.get('type');
+            const searchQuery = urlParams.get('search');
+            const regionParam = urlParams.get('region');
+
+            // Apply category from URL
+            if (categoryType) {
+                filtered = filtered.filter(p => p.category === categoryType);
+            }
+
+            // Apply region from URL parameter
+            if (regionParam) {
+                const regionQuery = regionParam.toLowerCase();
+                filtered = filtered.filter(p => 
+                    p.region.toLowerCase().includes(regionQuery)
+                );
+                
+                // Also check the corresponding checkbox in the sidebar
+                const regionCheckboxes = document.querySelectorAll('.region-filter input');
+                regionCheckboxes.forEach(cb => {
+                    if (cb.value.toLowerCase() === regionQuery) {
+                        cb.checked = true;
+                    }
+                });
+            }
+
+            // Apply search from URL
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(query) ||
+                    p.description.toLowerCase().includes(query) ||
+                    p.region.toLowerCase().includes(query)
+                );
+            }
+
+            // Apply region filter from checkboxes
+            const checkedRegions = Array.from(document.querySelectorAll('.region-filter input:checked'))
+                .map(cb => cb.value.toLowerCase());
+            if (checkedRegions.length > 0) {
+                filtered = filtered.filter(p => 
+                    checkedRegions.some(region => p.region.toLowerCase().includes(region))
+                );
+            }
+
+            // Apply eco rating filter
+            const ecoRanges = document.querySelectorAll('.eco-range input[type="range"]');
+            ecoRanges.forEach(range => {
+                const minEco = parseInt(range.value);
+                if (minEco > 0) {
+                    filtered = filtered.filter(p => p.ecoRating >= minEco);
+                }
+            });
+
+            // Apply sorting
+            const sortSelect = document.querySelector('.sort-dropdown');
+            if (sortSelect) {
+                const sortBy = sortSelect.value;
+                switch (sortBy) {
+                    case 'price-low':
+                        filtered.sort((a, b) => a.price - b.price);
+                        break;
+                    case 'price-high':
+                        filtered.sort((a, b) => b.price - a.price);
+                        break;
+                    case 'eco-high':
+                        filtered.sort((a, b) => b.ecoRating - a.ecoRating);
+                        break;
+                    case 'name':
+                        filtered.sort((a, b) => a.name.localeCompare(b.name));
+                        break;
+                }
+            }
+
+            renderProducts(filtered);
+        }
+    </script>
+</body>
+</html>
