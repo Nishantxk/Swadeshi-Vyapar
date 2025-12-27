@@ -659,6 +659,39 @@ header {
     font-weight: 600;
 }
 
+/* Subcategory Filter Styles */
+.subcategory-filter-item {
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 20px;
+    background: var(--light-bg);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.subcategory-filter-item:hover {
+    background: rgba(227, 154, 45, 0.2);
+    color: var(--primary-orange);
+}
+
+.subcategory-filter-item.active {
+    background: var(--primary-orange);
+    color: white;
+    font-weight: 500;
+}
+
+.subcategory-filter-item i {
+    font-size: 0.85rem;
+}
+
+.secondlife-filter {
+    display: none;
+}
+
 .eco-range {
     margin-top: 10px;
 }

@@ -164,7 +164,7 @@
                     <li><a href="category.html?type=textiles">Textiles</a></li>
                     <li><a href="category.html?type=spices">Spices</a></li>
                     <li><a href="category.html?type=handicrafts">Handicrafts</a></li>
-                    <li><a href="category.html?type=jewellery">Jewellery</a></li>
+                    <li><a href="category.html?type=electronics">Electronics</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -211,6 +211,45 @@
 
             const container = document.querySelector('.product-details-container');
             if (container) {
+                // Product-specific ratings & reviews section (for products with rating data)
+                let ratingsSection = '';
+                if (product.rating && product.reviewCount && product.reviews) {
+                    const stars = '★'.repeat(Math.floor(product.rating)) + (product.rating % 1 >= 0.5 ? '½' : '') + '☆'.repeat(5 - Math.ceil(product.rating));
+                    ratingsSection = `
+                        <div style="margin: 20px 0; padding: 20px; background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%); border-radius: 12px; border-left: 4px solid #ffc107;">
+                            <h4 style="color: #856404; margin-bottom: 12px; font-size: 1.1rem;">
+                                <i class="fas fa-star" style="color: #ffc107;"></i> Customer Ratings & Reviews
+                            </h4>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                                <span style="font-size: 1.8rem; color: #ffc107;">${product.rating}</span>
+                                <span style="color: #ffc107; font-size: 1.2rem;">${stars}</span>
+                                <span style="color: #6c757d; font-size: 0.9rem;">(${product.reviewCount} Reviews)</span>
+                            </div>
+                            <div style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 12px;">
+                                ${product.reviews.map(review => `
+                                    <p style="color: #495057; font-size: 0.9rem; margin-bottom: 8px; font-style: italic;">
+                                        <i class="fas fa-quote-left" style="color: #ffc107; margin-right: 5px; font-size: 0.8rem;"></i>
+                                        ${review}
+                                    </p>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Product-specific sustainability section
+                let sustainabilitySection = '';
+                if (product.sustainability) {
+                    sustainabilitySection = `
+                        <div style="margin: 15px 0; padding: 15px 20px; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 10px; border-left: 4px solid #4caf50;">
+                            <p style="color: #2e7d32; font-size: 0.95rem; margin: 0;">
+                                <i class="fas fa-leaf" style="color: #4caf50; margin-right: 8px;"></i>
+                                <strong>Carbon Mitigation:</strong> ${product.sustainability}
+                            </p>
+                        </div>
+                    `;
+                }
+
                 // Extra details only for Banarasi Silk Saree (id: 1)
                 const extraDetails = product.id === 1 ? `
                     <div style="margin-top: 20px; padding: 20px; background: #fff8e1; border-radius: 12px; border-left: 4px solid #ff9800;">
@@ -235,16 +274,59 @@
                     </div>
                 ` : '';
 
+                // Second Life product details (condition, age, seller contact, status)
+                const secondLifeDetails = product.category === 'secondlife' ? `
+                    <div style="margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-radius: 12px; border-left: 4px solid #2196f3;">
+                        <h4 style="color: #1565c0; margin-bottom: 15px; font-size: 1.1rem;">
+                            <i class="fas fa-recycle" style="color: #2196f3;"></i> Second Life Product Info
+                        </h4>
+                        <div style="display: grid; gap: 12px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="background: #fff; padding: 8px 12px; border-radius: 8px; min-width: 130px; color: #546e7a; font-size: 0.85rem;">
+                                    <i class="fas fa-box" style="color: #2196f3; margin-right: 6px;"></i>Condition
+                                </span>
+                                <span style="color: #1565c0; font-weight: 600;">${product.condition || 'Used'}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="background: #fff; padding: 8px 12px; border-radius: 8px; min-width: 130px; color: #546e7a; font-size: 0.85rem;">
+                                    <i class="fas fa-clock" style="color: #ff9800; margin-right: 6px;"></i>Product Age
+                                </span>
+                                <span style="color: #1565c0; font-weight: 600;">${product.productAge || 'N/A'}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="background: #fff; padding: 8px 12px; border-radius: 8px; min-width: 130px; color: #546e7a; font-size: 0.85rem;">
+                                    <i class="fas fa-phone-alt" style="color: #4caf50; margin-right: 6px;"></i>Seller Contact
+                                </span>
+                                <span style="color: #1565c0; font-weight: 600;">${product.sellerContact || 'N/A'}</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="background: #fff; padding: 8px 12px; border-radius: 8px; min-width: 130px; color: #546e7a; font-size: 0.85rem;">
+                                    <i class="fas fa-tag" style="color: #e91e63; margin-right: 6px;"></i>Status
+                                </span>
+                                <span style="background: #ffeb3b; color: #5d4037; font-weight: 600; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;">
+                                    ${product.productStatus || 'Resale'}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                ` : '';
+
                 container.innerHTML = `
                     <div class="product-gallery">
                         <img src="${product.image}" alt="${product.name}">
                         ${extraDetails}
+                        ${secondLifeDetails}
                     </div>
                     <div class="product-detail-info">
                         <h1>${product.name}</h1>
                         <p class="product-detail-region">📍 ${product.region}</p>
                         <p class="product-detail-price">₹${product.price.toLocaleString('en-IN')}</p>
+                        
+                        ${ratingsSection}
+                        
                         <p class="product-description">${product.description}</p>
+                        
+                        ${sustainabilitySection}
                         
                         <div class="eco-rating-section">
                             <h4>🌱 Eco Rating</h4>

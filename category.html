@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         body { font-family: 'Poppins', sans-serif; }
@@ -95,9 +95,20 @@
                 <li class="category-filter-item" data-category="spices"><i class="fas fa-pepper-hot"></i> Spices</li>
                 <li class="category-filter-item" data-category="handicrafts"><i class="fas fa-paint-brush"></i> Handicrafts</li>
                 <li class="category-filter-item" data-category="utsav"><i class="fas fa-fire"></i> Utsav</li>
-                <li class="category-filter-item" data-category="jewellery"><i class="fas fa-gem"></i> Jewellery</li>
-                <li class="category-filter-item" data-category="electronics"><i class="fas fa-mobile-alt"></i> Electronics</li>
+                <li class="category-filter-item" data-category="toys"><i class="fas fa-puzzle-piece"></i> Toys</li>
+                <li class="category-filter-item" data-category="electronics"><i class="fas fa-headphones"></i> Electronics</li>
                 <li class="category-filter-item" data-category="arts"><i class="fas fa-palette"></i> Arts</li>
+                <li class="category-filter-item" data-category="secondlife"><i class="fas fa-recycle"></i> Second Life</li>
+            </ul>
+        </div>
+        
+        <!-- Second Life Subcategory Filter -->
+        <div class="filter-section secondlife-filter" id="secondlifeFilterMobile" style="display: none;">
+            <h4><i class="fas fa-filter"></i> Second Life Subcategory</h4>
+            <ul>
+                <li class="subcategory-filter-item active" data-subcategory="all"><i class="fas fa-border-all"></i> All Items</li>
+                <li class="subcategory-filter-item" data-subcategory="abhyas"><i class="fas fa-book"></i> Abhyas (Books)</li>
+                <li class="subcategory-filter-item" data-subcategory="other"><i class="fas fa-box"></i> Other</li>
             </ul>
         </div>
         
@@ -151,9 +162,20 @@
                         <li class="category-filter-item" data-category="spices"><i class="fas fa-pepper-hot"></i> Spices</li>
                         <li class="category-filter-item" data-category="handicrafts"><i class="fas fa-paint-brush"></i> Handicrafts</li>
                         <li class="category-filter-item" data-category="utsav"><i class="fas fa-fire"></i> Utsav</li>
-                        <li class="category-filter-item" data-category="jewellery"><i class="fas fa-gem"></i> Jewellery</li>
-                        <li class="category-filter-item" data-category="electronics"><i class="fas fa-mobile-alt"></i> Electronics</li>
+                        <li class="category-filter-item" data-category="toys"><i class="fas fa-puzzle-piece"></i> Toys</li>
+                        <li class="category-filter-item" data-category="electronics"><i class="fas fa-headphones"></i> Electronics</li>
                         <li class="category-filter-item" data-category="arts"><i class="fas fa-palette"></i> Arts</li>
+                        <li class="category-filter-item" data-category="secondlife"><i class="fas fa-recycle"></i> Second Life</li>
+                    </ul>
+                </div>
+                
+                <!-- Second Life Subcategory Filter -->
+                <div class="sidebar-card secondlife-filter" id="secondlifeFilterDesktop" style="display: none;">
+                    <h4><i class="fas fa-filter"></i> Second Life Subcategory</h4>
+                    <ul>
+                        <li class="subcategory-filter-item active" data-subcategory="all"><i class="fas fa-border-all"></i> All Items</li>
+                        <li class="subcategory-filter-item" data-subcategory="abhyas"><i class="fas fa-book"></i> Abhyas (Books)</li>
+                        <li class="subcategory-filter-item" data-subcategory="other"><i class="fas fa-box"></i> Other</li>
                     </ul>
                 </div>
                 
@@ -195,6 +217,7 @@
                     <h2>All Products</h2>
                     <select class="sort-dropdown">
                         <option value="default">Sort by: Default</option>
+                        <option value="trending">Trending Products</option>
                         <option value="price-low">Price: Low to High</option>
                         <option value="price-high">Price: High to Low</option>
                         <option value="eco-high">Eco Rating: High to Low</option>
@@ -231,7 +254,8 @@
                     <li><a href="category.html?type=textiles">Textiles</a></li>
                     <li><a href="category.html?type=spices">Spices</a></li>
                     <li><a href="category.html?type=handicrafts">Handicrafts</a></li>
-                    <li><a href="category.html?type=jewellery">Jewellery</a></li>
+                    <li><a href="category.html?type=toys">Toys</a></li>
+                    <li><a href="category.html?type=secondlife">Second Life</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -348,7 +372,30 @@
 
             // Initial load - filter products based on URL params
             filterProducts();
+            
+            // Show/hide Second Life subcategory filter based on category
+            updateSecondLifeFilter();
+            
+            // Subcategory filter click handler
+            document.querySelectorAll('.subcategory-filter-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.subcategory-filter-item').forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    filterProducts();
+                });
+            });
         });
+        
+        // Show/hide Second Life subcategory filter
+        function updateSecondLifeFilter() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryType = urlParams.get('type');
+            const isSecondLife = categoryType === 'secondlife';
+            
+            document.querySelectorAll('.secondlife-filter').forEach(el => {
+                el.style.display = isSecondLife ? 'block' : 'none';
+            });
+        }
 
         // Filter products function
         function filterProducts() {
@@ -363,6 +410,17 @@
             // Apply category from URL
             if (categoryType) {
                 filtered = filtered.filter(p => p.category === categoryType);
+            }
+            
+            // Apply subcategory filter for Second Life
+            if (categoryType === 'secondlife') {
+                const activeSubcategory = document.querySelector('.subcategory-filter-item.active');
+                if (activeSubcategory) {
+                    const subcategory = activeSubcategory.dataset.subcategory;
+                    if (subcategory && subcategory !== 'all') {
+                        filtered = filtered.filter(p => p.subcategory === subcategory);
+                    }
+                }
             }
 
             // Apply region from URL parameter
@@ -414,6 +472,9 @@
             if (sortSelect) {
                 const sortBy = sortSelect.value;
                 switch (sortBy) {
+                    case 'trending':
+                        filtered.sort((a, b) => (b.salesCount || 0) - (a.salesCount || 0));
+                        break;
                     case 'price-low':
                         filtered.sort((a, b) => a.price - b.price);
                         break;
